@@ -22,7 +22,7 @@
     - update /etc/hosts
 
 - name: Have we configured resolvconf before?
-  shell: "[ -f $common_resolvconf_dpkg_reconfigure_done ] && echo 'found' || echo ''"
+  shell: "[ -f $common_resolvconf_dpkg_reconfigure_done ] && echo 'found' || echo ''" creates=$common_resolvconf_dpkg_reconfigure_done
   register: common_resolvconf_already_configured 
 
 - name: common | Configure resolvconf
@@ -38,9 +38,6 @@
 
 - name: common | Ugly hack to make sure the resolvconf reconfigure does not get run more than once 
   shell: touch $common_resolvconf_dpkg_reconfigure_done creates=$common_resolvconf_dpkg_reconfigure_done
-  tags: 
-    - ldap 
-    - auth 
 
 - name: common | Set /etc/network/interfaces
   template: src=root/etc/network/interfaces.j2 dest=/etc/network/interfaces
