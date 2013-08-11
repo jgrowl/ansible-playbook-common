@@ -1,0 +1,35 @@
+---
+# Handler to handle common notifications. Handlers are called by other plays.
+# See http://ansible.cc/docs/playbooks.html for more information about handlers.
+
+- name: restart ntp
+  service: name=ntpd state=restarted
+
+- name: restart networking
+  service: name=networking state=restarted
+
+- name: update apt-cache
+  apt: update_cache=yes
+
+- name: restart interface
+  command: ifdown eth0 && ifup eth0 
+
+- name: restart nscd
+  service: name=nscd state=restarted
+
+#- name: Refresh resolv.conf 
+#  command: echo "nameserver X.X.X.X
+#nameserver Y.Y.Y.Y
+#search SSSS" | sudo resolvconf -a IIII.FFFF 
+
+#- name: restart iptables
+#  service: name=iptables state=restarted
+
+- name: force hostname change
+  command: hostname {{generated_host_name.stdout}}
+
+- name: update /etc/hostname
+  template: src=etc/hostname.j2 dest=/etc/hostname
+
+- name: update /etc/hosts
+  template: src=etc/hosts.j2 dest=/etc/hosts

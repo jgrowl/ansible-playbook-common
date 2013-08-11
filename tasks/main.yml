@@ -1,0 +1,23 @@
+---
+# This playbook contains common plays that will be run on all nodes.
+
+- name: common | Install common packages 
+  action: apt pkg=$item state=installed
+  with_items:
+    - ntp
+
+- name: common | ntp should be running
+  action: service name=ntp state=running
+  tags: ntp
+
+- name: common | Make an ansible directory for remembering what we previously run
+  file: path=$common_done_dir state=directory owner=root group=root
+
+- name: common | Generate hostname based on the ip address
+  #shell: touch ~/.ansible/generate-hostname && uuidgen creates=~/.ansible/generate-hostname
+  shell: touch $common_done_dir/generate-hostname && printf ip-%s `/sbin/ifconfig eth0 | grep "inet addr" | awk -F: '{print $2}' | awk '{print  $1}' | sed -e 's/\./-/g'` creates=$common_done_dir/generate-hostname
+  register: common_generated_host_name
+  notify:
+    - force hostname change
+    - update /etc/hostname
+    - update /etc/hosts
