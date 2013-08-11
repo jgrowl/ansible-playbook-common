@@ -21,6 +21,16 @@
     - update /etc/hostname
     - update /etc/hosts
 
+- name: common | Configure resolvconf
+  dpkg_reconfigure: 
+    pkg: resolvconf
+    answers:
+      resolvconf/downup-interfaces:
+      resolvconf/linkify-resolvconf: true
+      resolvconf/link-tail-to-original: true
+      resolvconf/fixing-immutable:
+      resolvconf/reboot-recommended-after-removal:
+
 - name: common | Set /etc/network/interfaces
   template: src=root/etc/network/interfaces.j2 dest=/etc/network/interfaces
   notify:
