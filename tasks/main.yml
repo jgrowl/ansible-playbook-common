@@ -34,7 +34,7 @@
       resolvconf/link-tail-to-original: true
       resolvconf/fixing-immutable:
       resolvconf/reboot-recommended-after-removal:
-   when: common_resolvconf_already_configured.stdout.find('found') == -1
+  when: common_resolvconf_already_configured.stdout.find('found') == -1
 
 - name: common | Ugly hack to make sure the resolvconf reconfigure does not get run more than once 
   shell: touch $common_resolvconf_dpkg_reconfigure_done creates=$common_resolvconf_dpkg_reconfigure_done
