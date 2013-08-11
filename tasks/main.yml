@@ -14,8 +14,7 @@
   file: path=$common_done_dir state=directory owner=root group=root
 
 - name: common | Generate hostname based on the ip address
-  #shell: touch ~/.ansible/generate-hostname && uuidgen creates=~/.ansible/generate-hostname
-  shell: touch $common_done_dir/generate-hostname && printf ip-%s `/sbin/ifconfig eth0 | grep "inet addr" | awk -F: '{print $2}' | awk '{print  $1}' | sed -e 's/\./-/g'` creates=$common_done_dir/generate-hostname
+  shell: touch $common_done_dir/generate-hostname && echo ip-${ansible_eth0.ipv4.address} | tr . -  creates=$common_done_dir/generate-hostname
   register: common_generated_host_name
   notify:
     - force hostname change
