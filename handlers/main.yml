@@ -26,10 +26,10 @@
 #  service: name=iptables state=restarted
 
 - name: force hostname change
-  command: hostname {{generated_host_name.stdout}}
+  command: hostname {{common_generated_host_name.stdout}}
 
 - name: update /etc/hostname
-  template: src=etc/hostname.j2 dest=/etc/hostname
+  template: src=root/etc/hostname.j2 dest=/etc/hostname
 
 - name: update /etc/hosts
-  template: src=etc/hosts.j2 dest=/etc/hosts
+  template: src=root/etc/hosts.j2 dest=/etc/hosts
