@@ -1,1 +1,8 @@
-common_domain_postfix: example.com
+common_iface: ansible_default_ipv4.alias
+common_address: ansible_default_ipv4.address
+common_netmask: ansible_default_ipv4.netmask
+common_network: ansible_default_ipv4.network
+common_broadcast:
+common_gateway: ansible_default_ipv4.gateway
+common_dns_name_servers:
+common_dns_search:
