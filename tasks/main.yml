@@ -23,4 +23,5 @@
 
 - name: common | Set /etc/network/interfaces
   template: src=root/etc/network/interfaces.j2 dest=/etc/network/interfaces
+  notify:
     - restart interface
