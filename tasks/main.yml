@@ -22,7 +22,7 @@
     - update /etc/hosts
 
 - name: Have we configured resolvconf before?
-  shell: "[ -f $common_resolvconf_dpkg_reconfigure_done ] && echo 'found' || echo ''" creates=$common_resolvconf_dpkg_reconfigure_done
+  shell: "[ -f $common_resolvconf_dpkg_reconfigure_done ] && echo 'found' || echo ''"
   register: common_resolvconf_already_configured 
 
 - name: common | Configure resolvconf
