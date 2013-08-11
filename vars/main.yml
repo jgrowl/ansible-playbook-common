@@ -8,3 +8,5 @@ global_update_apt_cache: True
 ansible_done_dir: /etc/ansible/.done
 
 common_done_dir: $ansible_done_dir/common
+
+common_resolvconf_dpkg_reconfigure_done: $common_done_dir/resolvconf-dpkg-reconfigure
