@@ -12,7 +12,7 @@
   apt: update_cache=yes
 
 - name: restart interface
-  command: ifdown eth0 && ifup eth0 
+  shell: ifdown eth0 && ifup eth0 
 
 - name: restart nscd
   service: name=nscd state=restarted
