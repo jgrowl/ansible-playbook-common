@@ -8,6 +8,7 @@
   user: $global_user
   sudo: $global_use_sudo
   roles: 
+    - git-ppa
     - {role: apt-update, when: global_update_apt_cache}
   tasks:
     - include: tasks/main.yml

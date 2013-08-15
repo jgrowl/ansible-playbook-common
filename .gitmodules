@@ -1,3 +1,6 @@
 [submodule "roles/apt-update"]
 	path = roles/apt-update
 	url = https://github.com/jgrowl/ansible-playbook-apt-update.git
+[submodule "roles/git-ppa"]
+	path = roles/git-ppa
+	url = https://github.com/jgrowl/ansible-playbook-git-ppa.git
